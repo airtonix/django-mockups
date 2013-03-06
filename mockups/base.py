@@ -230,7 +230,7 @@ class Mockup(object):
             else:
                 auto_created_through_model = True
         else:
-            auto_created_through_model = through._meta.auto_created
+            auto_created_through_model = getattr(getattr(through, '_meta', None), 'auto_created', False)
 
         if auto_created_through_model:
             return self.process_field(instance, field)
